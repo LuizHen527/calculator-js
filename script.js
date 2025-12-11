@@ -29,5 +29,21 @@ function operate(operator, firstNum, secondNum) {
         
     }
 
+
+}
+
+function updateDisplay(digit) {
     
 }
+
+function program() {
+    
+    let numberButtons = document.querySelectorAll(".number-button");
+    let display = document.querySelector(".display");
+
+    numberButtons.forEach(item => item.addEventListener("click", () => {        
+        display.textContent = display.textContent + item.textContent;
+    }))
+}
+
+program();
