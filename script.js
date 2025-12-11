@@ -1,20 +1,20 @@
-function add(firstNum, ...secondNum) {
-    console.log("add");
+function add(firstNum, secondNum) {
+    return firstNum + secondNum;
     
 }
 
-function subtract(firstNum, ...secondNum) {
-    console.log("subtract");
+function subtract(firstNum, secondNum) {
+    return firstNum - secondNum;
     
 }
 
-function multiply(firstNum, ...secondNum) {
-    console.log("multiply");
+function multiply(firstNum, secondNum) {
+    return firstNum * secondNum;
     
 }
 
-function divide(firstNum, ...secondNum) {
-    console.log("divide");
+function divide(firstNum, secondNum) {
+    return firstNum / secondNum;
     
 }
 
@@ -22,6 +22,8 @@ function operate(numArr) {
     let numberOne = null;
     let numberTwo = null;
     let operator = null;
+    let result = null;
+
     let OPERATORS = "+-*/";    
 
     for (let digit of numArr) {
@@ -44,21 +46,21 @@ function operate(numArr) {
         
 
         if (operator === "+") {
-            add(numberOne, numberTwo);
+            result = add(numberOne, numberTwo);
 
         } else if (operator === "-") {
-            subtract(numberOne, numberTwo);
+            result = subtract(numberOne, numberTwo);
 
         } else if (operator === "*") {
-            multiply(numberOne, numberTwo);
+            result = multiply(numberOne, numberTwo);
 
         } else if (operator === "/") {
-            divide(numberOne, numberTwo);
+            result = divide(numberOne, numberTwo);
             
         }
-
-
     }
+
+    return result;
 }
 
 function extractCalc(string) {
@@ -73,18 +75,32 @@ function program() {
     let resultButton = document.querySelector(".result-button");
     let display = document.querySelector(".display span");
 
-    numberButtons.forEach(item => item.addEventListener("click", () => {        
+    let resultOnDisplay = false;
+
+    numberButtons.forEach(item => item.addEventListener("click", () => {
+        if (resultOnDisplay) {
+            display.textContent = "";
+            resultOnDisplay = false;
+        }
+
         display.textContent = display.textContent + item.textContent;
     }));
 
     operatorButtons.forEach(item => item.addEventListener("click", () => {
+        if (resultOnDisplay) {
+            display.textContent = "";
+            resultOnDisplay = false;
+        }
+
         display.textContent = display.textContent + " " + item.textContent + " ";
     }));
 
     resultButton.addEventListener("click", () => {
         let calcArr = extractCalc(display.textContent);
 
-        operate(calcArr);
+        display.textContent = operate(calcArr);
+
+        resultOnDisplay = true;
     });
 }
 
