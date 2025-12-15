@@ -95,6 +95,7 @@ function program() {
     let operatorButtons = document.querySelectorAll(".operator-button");
     let resultButton = document.querySelector(".result-button");
     let display = document.querySelector(".display span");
+    let clearButton = document.querySelector(".clear-button");
 
     let resultOnDisplay = false;
 
@@ -129,6 +130,12 @@ function program() {
 
         resultOnDisplay = true;
     });
+
+    clearButton.addEventListener("click", () => {
+        display.textContent = "0";
+        resultOnDisplay = true;
+    })
+        
 }
 
 program();
