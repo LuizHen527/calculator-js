@@ -109,6 +109,7 @@ function program() {
     let display = document.querySelector(".display span");
     let clearButton = document.querySelector(".clear-button");
     let dotButton = document.querySelector(".dot-button");
+    let backButton = document.querySelector(".back-button");
 
     let resultOnDisplay = true;
 
@@ -150,7 +151,7 @@ function program() {
     clearButton.addEventListener("click", () => {
         display.textContent = "0";
         resultOnDisplay = true;
-    })
+    });
 
     dotButton.addEventListener("click", () => {
         let calcArr = extractCalc(display.textContent);
@@ -158,6 +159,12 @@ function program() {
         if (!(calcArr[calcArr.length - 1].includes("."))) {
             display.textContent = display.textContent + ".";
         } 
+    });
+
+    backButton.addEventListener("click", () => {
+        let text = display.textContent;        
+
+        display.textContent = text.slice(0, text.length - 1);
     })
         
 }
