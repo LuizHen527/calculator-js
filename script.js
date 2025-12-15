@@ -14,6 +14,11 @@ function multiply(firstNum, secondNum) {
 }
 
 function divide(firstNum, secondNum) {
+
+    if (firstNum === "0" || secondNum === "0") {
+        return "Dont divide by zero."
+    }
+
     return firstNum / secondNum;
     
 }
