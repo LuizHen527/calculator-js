@@ -108,8 +108,9 @@ function program() {
     let resultButton = document.querySelector(".result-button");
     let display = document.querySelector(".display span");
     let clearButton = document.querySelector(".clear-button");
+    let dotButton = document.querySelector(".dot-button");
 
-    let resultOnDisplay = false;
+    let resultOnDisplay = true;
 
     numberButtons.forEach(item => item.addEventListener("click", () => {
         if (resultOnDisplay) {
@@ -133,9 +134,7 @@ function program() {
         }
 
         if (!(calcArr[calcArr.length - 1] === item.textContent)) {
-            console.log("batata");
             display.textContent = display.textContent + " " + item.textContent + " ";
-
         }
 
     }));
@@ -151,6 +150,14 @@ function program() {
     clearButton.addEventListener("click", () => {
         display.textContent = "0";
         resultOnDisplay = true;
+    })
+
+    dotButton.addEventListener("click", () => {
+        let calcArr = extractCalc(display.textContent);
+
+        if (!(calcArr[calcArr.length - 1].includes("."))) {
+            display.textContent = display.textContent + ".";
+        } 
     })
         
 }
