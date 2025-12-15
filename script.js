@@ -136,7 +136,7 @@ function program() {
 
         if (!(calcArr[calcArr.length - 1] === item.textContent)) {
             display.textContent = display.textContent + " " + item.textContent + " ";
-        }
+        }   
 
     }));
 
@@ -165,6 +165,12 @@ function program() {
         let text = display.textContent;        
 
         display.textContent = text.slice(0, text.length - 1);
+
+        if (display.textContent === "") {
+            display.textContent = "0";
+
+            resultOnDisplay = true;
+        }
     });
 
     document.addEventListener("keypress", (event) => {
@@ -177,12 +183,43 @@ function program() {
                 resultOnDisplay = false;
             }
             display.textContent = display.textContent + event.key;
-            
+
         } else if (OPERATORS.includes(event.key)) {
             console.log(event.key);
-            
-        }
 
+            let calcArr = extractCalc(display.textContent);
+
+            if (resultOnDisplay) {
+                display.textContent = "";
+                resultOnDisplay = false;
+            }
+
+            if (calcArr.length === 3) {
+                display.textContent = operate(calcArr);
+            }
+
+            if (!(calcArr[calcArr.length - 1] === event.key)) {
+                display.textContent = display.textContent + " " + event.key + " ";
+            }   
+        } else if (event.key === "Delete") {
+            let text = display.textContent;        
+
+            display.textContent = text.slice(0, text.length - 1);
+
+            if (display.textContent === "") {
+                display.textContent = "0";
+
+                resultOnDisplay = true;
+            }
+        } else if (event.key === "Enter") {
+            let calcArr = extractCalc(display.textContent);
+
+            display.textContent = operate(calcArr);
+
+            resultOnDisplay = true;
+        }
+        
+    
         
     })
         
