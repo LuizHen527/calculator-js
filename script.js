@@ -165,6 +165,25 @@ function program() {
         let text = display.textContent;        
 
         display.textContent = text.slice(0, text.length - 1);
+    });
+
+    document.addEventListener("keypress", (event) => {
+        const NUMBERS = "0123456789";
+        const OPERATORS = "+-*/";   
+
+        if (NUMBERS.includes(event.key)) {
+            if (resultOnDisplay) {
+                display.textContent = "";
+                resultOnDisplay = false;
+            }
+            display.textContent = display.textContent + event.key;
+            
+        } else if (OPERATORS.includes(event.key)) {
+            console.log(event.key);
+            
+        }
+
+        
     })
         
 }
