@@ -90,7 +90,14 @@ function operate(numArr) {
 }
 
 function extractCalc(string) {
-    return string.split(" ");
+
+    let calcArr = string.split(" ");
+
+    if (calcArr[2] === "") {
+        calcArr.pop();
+    }
+
+    return calcArr;
     
 }
 
@@ -125,7 +132,12 @@ function program() {
             display.textContent = operate(calcArr);
         }
 
-        display.textContent = display.textContent + " " + item.textContent + " ";
+        if (!(calcArr[calcArr.length - 1] === item.textContent)) {
+            console.log("batata");
+            display.textContent = display.textContent + " " + item.textContent + " ";
+
+        }
+
     }));
 
     resultButton.addEventListener("click", () => {
