@@ -1,5 +1,5 @@
 function add(firstNum, secondNum) {
-    return firstNum + secondNum;
+    return Number(firstNum) + Number(secondNum);
     
 }
 
@@ -18,13 +18,30 @@ function divide(firstNum, secondNum) {
     
 }
 
+function roundFloat(number) {
+
+    let numberRounded = number + "";
+
+    numberRounded = numberRounded.split(".");
+
+    if (numberRounded[1].length > 3) {
+
+        numberRounded = numberRounded[0] + "." + numberRounded[1].slice(0, 3);
+
+        return numberRounded + "...";
+    }
+
+    return number
+    
+}
+
 function operate(numArr) {
     let numberOne = null;
     let numberTwo = null;
     let operator = null;
-    let result = null;
+    let result = 0;
 
-    let OPERATORS = "+-*/";    
+    const OPERATORS = "+-*/";    
 
     for (let digit of numArr) {
     
@@ -58,6 +75,10 @@ function operate(numArr) {
             result = divide(numberOne, numberTwo);
             
         }
+    }    
+
+    if (!Number.isInteger(result)) {
+        result = roundFloat(result);
     }
 
     return result;
@@ -87,9 +108,15 @@ function program() {
     }));
 
     operatorButtons.forEach(item => item.addEventListener("click", () => {
+        let calcArr = extractCalc(display.textContent);
+
         if (resultOnDisplay) {
             display.textContent = "";
             resultOnDisplay = false;
+        }
+
+        if (calcArr.length === 3) {
+            display.textContent = operate(calcArr);
         }
 
         display.textContent = display.textContent + " " + item.textContent + " ";
