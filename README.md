@@ -4,7 +4,7 @@ This is a project made to the [Odin Project Foundations Path](https://www.theodi
 
 ## Screenshot
 
-![Web site screen gif]()
+![Web site screen gif](./assets/calculator-js.gif)
 
 ## About
 
