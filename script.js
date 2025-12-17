@@ -173,20 +173,21 @@ function program() {
         }
     });
 
-    document.addEventListener("keypress", (event) => {
+    document.addEventListener("keydown", (event) => {
         const NUMBERS = "0123456789";
         const OPERATORS = "+-*/";   
 
         if (NUMBERS.includes(event.key)) {
+            
             if (resultOnDisplay) {
                 display.textContent = "";
                 resultOnDisplay = false;
             }
+
             display.textContent = display.textContent + event.key;
 
         } else if (OPERATORS.includes(event.key)) {
-            console.log(event.key);
-
+            
             let calcArr = extractCalc(display.textContent);
 
             if (resultOnDisplay) {
@@ -200,23 +201,24 @@ function program() {
 
             if (!(calcArr[calcArr.length - 1] === event.key)) {
                 display.textContent = display.textContent + " " + event.key + " ";
-            }   
-        } else if (event.key === "Delete") {
-            let text = display.textContent;        
+            } 
 
-            display.textContent = text.slice(0, text.length - 1);
-
-            if (display.textContent === "") {
-                display.textContent = "0";
-
-                resultOnDisplay = true;
-            }
         } else if (event.key === "Enter") {
-            let calcArr = extractCalc(display.textContent);
 
-            display.textContent = operate(calcArr);
+            resultButton.click();
 
-            resultOnDisplay = true;
+        } else if (event.key === "Backspace") {
+            
+            backButton.click();
+            
+        } else if (event.key === "Delete") {
+
+            clearButton.click();
+
+        } else if (event.key === ".") {
+
+            dotButton.click();
+            
         }
         
     
